@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locale — Conceito de Startup</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f2eb;
+    --accent: #c84a2e;
+    --muted: #7a7570;
+    --rule: #d6d2c8;
+    --card: #eceae3;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 64px 48px;
+  }
+
+  /* HEADER */
+  header {
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 32px 0 28px;
+    margin-bottom: 52px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+  }
+
+  .wordmark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .wordmark span {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .tagline {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* SECTION LABELS */
+  .label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  /* HERO STATEMENT */
+  .hero {
+    margin-bottom: 52px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    line-height: 1.2;
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 580px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 44px 0;
+  }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 52px;
+  }
+
+  .two-col h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .two-col p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* SCENARIO CARDS */
+  .scenarios {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 52px;
+  }
+
+  .scenario {
+    background: var(--card);
+    border-radius: 6px;
+    padding: 20px 22px;
+  }
+
+  .scenario .route {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .scenario .route span {
+    color: var(--accent);
+  }
+
+  .scenario p {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* LIFESTYLE SIGNALS */
+  .signals {
+    margin-bottom: 52px;
+  }
+
+  .signals h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .signal-group {
+    background: var(--card);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+
+  .signal-group h3 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .signal-group ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    margin-bottom: 52px;
+  }
+
+  .steps h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .step-row {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: start;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-content h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* REVENUE */
+  .revenue {
+    margin-bottom: 52px;
+  }
+
+  .revenue h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .revenue-card {
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  .revenue-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .revenue-card p {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* MOAT */
+  .moat {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 8px;
+    padding: 36px 40px;
+    margin-bottom: 52px;
+  }
+
+  .moat .label { color: #c84a2e; }
+
+  .moat h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .moat p {
+    font-size: 14px;
+    color: #a09c96;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  footer .logo-sm {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+  }
+
+  footer .logo-sm span { color: var(--accent); font-style: italic; }
+
+  @media print {
+    body { padding: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="wordmark">Lo<span>cal</span>e</div>
+  </div>
+  <div class="tagline">
+    Resumo do conceito · 2025<br>
+    UE · EUA · AU
+  </div>
+</header>
+
+<section class="hero">
+  <div class="label">O problema</div>
+  <h1>Quem está em recolocação começa cada conversa do zero — todas as vezes.</h1>
+  <p>Nova cidade. Novo corretor. Novo site. Novo sistema. As mesmas perguntas, os mesmos formulários, os mesmos recomeços frustrantes. Seja para uma pós-graduação, um emprego, a família ou simplesmente uma rua melhor — ninguém resolveu isso. Até agora.</p>
+</section>
+
+<hr>
+
+<section class="two-col">
+  <div>
+    <div class="label">O que é a Locale</div>
+    <h2>Um motor de compatibilidade de vida, não um portal imobiliário.</h2>
+    <p>A Locale combina uma IA conversacional que entende como você quer viver, uma camada de inteligência de bairros que avalia lugares por mais de 20 sinais de estilo de vida, um marketplace imobiliário global e uma rede de corretores locais que recebem um briefing completo do cliente antes da primeira reunião.</p>
+  </div>
+  <div>
+    <div class="label">A virada</div>
+    <h2>A busca começa pela vida. Os imóveis vêm depois.</h2>
+    <p>Zillow, Rightmove e Idealista respondem "o que está disponível". A Locale responde "onde eu realmente me encaixo?" — e então mostra o que está disponível lá. Para quem só quer uma casa, funciona como uma ótima busca imobiliária também. A profundidade é opcional. A inteligência está sempre ativa.</p>
+  </div>
+</section>
+
+<hr>
+
+<section class="signals">
+  <div class="label">Inteligência de estilo de vida</div>
+  <h2>A IA entende como você quer viver.</h2>
+  <div class="signal-grid">
+    <div class="signal-group">
+      <h3>Fase de vida</h3>
+      <ul>
+        <li>Estudante</li>
+        <li>Jovem profissional</li>
+        <li>Família com filhos</li>
+        <li>Trabalho remoto</li>
+        <li>Aposentado</li>
+      </ul>
+    </div>
+    <div class="signal-group">
+      <h3>Perfil urbano</h3>
+      <ul>
+        <li>Cidade caminhável</li>
+        <li>Subúrbio com verde</li>
+        <li>Praia &amp; natureza</li>
+        <li>Proximidade ao campus</li>
+        <li>Hub de ciência/tech</li>
+      </ul>
+    </div>
+    <div class="signal-group">
+      <h3>Comunidade</h3>
+      <ul>
+        <li>Faixa etária média</li>
+        <li>Multilíngue</li>
+        <li>Centros comunitários</li>
+        <li>Sociedade de alta confiança</li>
+        <li>Receptividade a expats</li>
+      </ul>
+    </div>
+    <div class="signal-group">
+      <h3>Infraestrutura</h3>
+      <ul>
+        <li>Transporte &amp; metrô</li>
+        <li>Escolas &amp; universidades</li>
+        <li>Hospitais próximos</li>
+        <li>Parques &amp; academias</li>
+        <li>Comércio a pé</li>
+      </ul>
+    </div>
+    <div class="signal-group">
+      <h3>Contexto</h3>
+      <ul>
+        <li>Custo de vida</li>
+        <li>Zona monetária</li>
+        <li>Clima</li>
+        <li>Índice de segurança</li>
+        <li>Idiomas falados</li>
+      </ul>
+    </div>
+    <div class="signal-group">
+      <h3>Imóvel</h3>
+      <ul>
+        <li>Orçamento &amp; aluguel/compra</li>
+        <li>Tamanho &amp; quartos</li>
+        <li>Mobiliado / sem mobília</li>
+        <li>Estadia curta ou longa</li>
+        <li>Campus ou fora do campus</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section style="margin-bottom:52px">
+  <div class="label">Quem atendemos — cenários reais</div>
+  <div class="scenarios" style="margin-top:16px; margin-bottom:0">
+    <div class="scenario">
+      <div class="route">Milão <span>→</span> Zurique</div>
+      <p>Estudante de doutorado precisa de moradia acessível perto da ETH, infraestrutura para ciclismo e comunidade multilíngue. A Locale indica bairros, lista quartos e conecta com um corretor em Zurique — sem pesquisa imobiliária suíça necessária.</p>
+    </div>
+    <div class="scenario">
+      <div class="route">Londres <span>→</span> Amsterdã</div>
+      <p>Engenheiro de software em novo emprego. Precisa de área com inglês acessível, bom trajeto e comunidade de expats. Já tem um perfil — o novo corretor em Amsterdã recebe o briefing instantaneamente.</p>
+    </div>
+    <div class="scenario">
+      <div class="route">Dublin <span>→</span> Boston</div>
+      <p>Estudante de pós-graduação avaliando quarto no campus versus apartamento próximo ao MIT. A Locale compara as duas opções com o perfil do usuário e conecta a um corretor local que já conhece o contexto.</p>
+    </div>
+    <div class="scenario">
+      <div class="route">Melbourne <span>→</span> Austin</div>
+      <p>Família se mudando por oportunidade no setor de tecnologia. Precisa de boas escolas públicas, subúrbio seguro e clima quente. O perfil foi criado em Melbourne — o corretor em Austin abre uma conversa, não um formulário de cadastro.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section class="steps">
+  <div class="label">Como funciona</div>
+  <h2>Um perfil. Válido em qualquer lugar.</h2>
+
+  <div class="step-row">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <h3>O cliente conversa com a IA</h3>
+      <p>Uma conversa natural — não um formulário. A IA pergunta sobre estilo de vida, prioridades, itens inegociáveis e prazo. Isso cria um perfil rico e estruturado. Acontece uma única vez.</p>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <h3>A IA encontra bairros e depois imóveis</h3>
+      <p>A plataforma avalia bairros na cidade de destino com mais de 20 sinais de estilo de vida e os classifica por compatibilidade. Os imóveis são exibidos dentro dessas áreas correspondentes — e não o contrário.</p>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <h3>Um corretor local recebe um briefing completo</h3>
+      <p>Antes de qualquer reunião, o corretor local indicado recebe um briefing gerado pela IA: orçamento, prioridades, itens inegociáveis, bairros preferidos e imóveis pré-selecionados. Sem recomeços. Sem reexplicações.</p>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <h3>O perfil acompanha o cliente aonde ele for</h3>
+      <p>Mudou o destino? Nova cidade? Outro corretor? O perfil permanece intacto. Cada novo corretor recebe o mesmo briefing. O cliente nunca precisa se apresentar novamente.</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section class="revenue">
+  <div class="label">Modelo de negócio</div>
+  <h2>Múltiplas fontes de receita, crescimento liderado pelos corretores.</h2>
+  <div class="revenue-grid">
+    <div class="revenue-card">
+      <h3>Assinatura de corretor (SaaS)</h3>
+      <p>Corretores locais pagam uma mensalidade para acessar leads pré-qualificados com briefings gerados por IA. Planos superiores garantem posicionamento prioritário.</p>
+    </div>
+    <div class="revenue-card">
+      <h3>Taxas de anúncio</h3>
+      <p>Proprietários e incorporadoras pagam taxas escalonadas de anúncio para ter visibilidade junto a compradores e locatários altamente compatíveis e com intenção de compra.</p>
+    </div>
+    <div class="revenue-card">
+      <h3>Indicação &amp; API</h3>
+      <p>Taxas de indicação de hipotecas e seguros. API de dados de bairros licenciada em modelo B2B para incorporadoras, planejadores urbanos e instituições financeiras.</p>
+    </div>
+  </div>
+</section>
+
+<section class="moat">
+  <div class="label">Vantagem defensável</div>
+  <h2>O flywheel de dados que nenhum concorrente consegue copiar rapidamente.</h2>
+  <p>Cada conversa aprimora o modelo de compatibilidade. Cada interação com corretores valida os dados dos bairros. Cada mudança internacional agrega sinais que nenhum portal local consegue capturar. A plataforma fica mais inteligente a cada usuário — e a rede de perfis torna o custo de troca extremamente alto para clientes que já investiram no seu perfil.</p>
+</section>
+
+<section style="margin-bottom:52px">
+  <div class="label">Foco geográfico</div>
+  <div class="two-col" style="margin-bottom:0">
+    <div>
+      <h2>Por que UE, EUA e AU primeiro.</h2>
+      <p>Essas três regiões compartilham as características que tornam o lançamento viável: dados públicos ricos e estruturados sobre bairros; mercados imobiliários maduros e digitalizados; grandes populações realizando exatamente esses movimentos transfronteiriços; e redes de corretores consolidadas e confiáveis para fazer parcerias.</p>
+    </div>
+    <div>
+      <h2>Para onde crescemos em seguida.</h2>
+      <p>América Latina, Sudeste Asiático e Oriente Médio vêm a seguir — à medida que os sistemas locais de dados imobiliários amadurecem e os corredores de migração transfronteiriça se expandem. A arquitetura da plataforma é independente de geografia. O go-to-market é regional por design.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Resumo do conceito · Confidencial · 2025</p>
+  <div class="logo-sm">Lo<span>cal</span>e</div>
+</footer>
+
+</body>
+</html>
